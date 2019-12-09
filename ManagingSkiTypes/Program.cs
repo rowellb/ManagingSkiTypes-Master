@@ -9,6 +9,15 @@ namespace ManagingSkiTypes
 {
     class Program
     {
+        //************************************
+        //Title: Managing Ski Types
+        //Application Type: framework – Console
+        //Description: Holds information about the brand and length of skis
+        //Author: Brynn Rowell
+        //Date Created: 11/20/2019
+        //Last Modified: 12/8/2019
+        //************************************
+
         static void Main(string[] args)
         {
             List<Skis> skis = InitializeSkiList();
@@ -56,34 +65,33 @@ namespace ManagingSkiTypes
         #region MAIN MENU
         static void DisplayMenuScreen(List<Skis> skis)
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
             bool quitApplication = false;
             ConsoleKeyInfo menuChoiceKey;
             char menuChoice;
 
             do
             {
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.ForegroundColor = ConsoleColor.White;
-
                 DisplayScreenHeader("Main Menu");
 
-                //
-                // get user menu choice
-                //
+                Console.WriteLine("\t*******************");
                 Console.WriteLine("\ta) List All Skis");
+                Console.WriteLine("\t*******************");
                 Console.WriteLine("\tb) View Ski Detail");
+                Console.WriteLine("\t*******************");
                 Console.WriteLine("\tc) Add Skis");
+                Console.WriteLine("\t*******************");
                 Console.WriteLine("\td) Delete Skis");
+                Console.WriteLine("\t*******************");
                 Console.WriteLine("\te) Update Skis");
-                Console.WriteLine("\tf) Write skis to file");
+                Console.WriteLine("\t*******************");
                 Console.WriteLine("\tq) Quit");
+                Console.WriteLine("\t*******************");
                 Console.Write("\t\tEnter Choice:");
                 menuChoiceKey = Console.ReadKey();
                 menuChoice = menuChoiceKey.KeyChar;
 
-                //
-                // process user menu choice
-                //
                 switch (menuChoice)
                 {
                     case 'a':
@@ -104,10 +112,6 @@ namespace ManagingSkiTypes
 
                     case 'e':
                         DisplayUpdateSkis(skis);
-                        break;
-
-                    case 'f':
-                        DisplayWriteToDataFile(skis);
                         break;
 
                     case 'q':
@@ -175,16 +179,12 @@ namespace ManagingSkiTypes
                 }
             }
 
-            //
-            // display monster detail
-            //
             Console.WriteLine();
             Console.WriteLine("\t*********************");
             SkiInfo(selectedSkis);
             Console.WriteLine("\t*********************");
 
             DisplayContinuePrompt();
-            Console.Clear();
         }
 
         static void DisplayAddSkis(List<Skis> skis)
@@ -243,10 +243,10 @@ namespace ManagingSkiTypes
             SkiInfo(newSkis);
             Console.WriteLine("\t-------------");
 
-            DisplayContinuePrompt();
 
+            DisplayContinuePrompt();
             skis.Add(newSkis);
-            Console.Clear();
+
         }
 
         static void DisplayDeleteSkis(List<Skis> skis)
@@ -290,8 +290,9 @@ namespace ManagingSkiTypes
                 Console.WriteLine($"\t{skiBrand} not found");
             }
 
+
             DisplayContinuePrompt();
-            Console.Clear();
+            
         }
 
         static void DisplayUpdateSkis(List<Skis> skis)
@@ -337,10 +338,6 @@ namespace ManagingSkiTypes
 
             } while (!validResponse);
 
-
-            //
-            // update monster properties
-            //
             string userResponse;
             Console.WriteLine();
             Console.WriteLine("\tReady to Update. [Press Enter to keep the current info]");
@@ -397,46 +394,7 @@ namespace ManagingSkiTypes
             Console.WriteLine("\t-------------");
 
             DisplayContinuePrompt();
-            Console.Clear();
-        }
-
-        static void WriteSkisToDataFile(List<Skis> skis)
-        {
-            string[] skisString = new string[skis.Count];
-
-            for (int index = 0; index < skis.Count; index++)
-            {
-                string skiString =
-                    skis[index].Brand + "," +
-                    skis[index].Length;
-
-                skisString[index] = skiString;
-            }
-
-            File.WriteAllLines("SkiData\\SkiData.txt", skisString);
-        }
-
-        static void DisplayWriteToDataFile(List<Skis> skis)
-        {
-            DisplayScreenHeader("Write to Ski List Data File");
-
-            Console.WriteLine("\tTReady to write the list to the file.");
-            Console.Write("\tEnter 'y' to continue or 'n' to cancel.");
-            if (Console.ReadLine().ToLower() == "y")
-            {
-                DisplayContinuePrompt();
-                WriteSkisToDataFile(skis);
-
-                Console.WriteLine();
-                Console.WriteLine("\tList written to data the file.");
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine("\tList not written to the data file.");
-            }
-
-            DisplayContinuePrompt();
+            
         }
 
         #endregion
@@ -459,7 +417,7 @@ namespace ManagingSkiTypes
 
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("\t\tThe Ski Manager");
+            Console.WriteLine("\t\tThe Ski Manager: A Program to Organize Ski Information");
             Console.WriteLine();
 
             DisplayContinuePrompt();
